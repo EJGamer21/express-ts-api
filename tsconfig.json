@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "target": "ESNext",
+        "outDir": "./dist",
+        "allowJs": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ]
+        },
+        "typeRoots": [
+            "node_modules/types"
+        ],
+        "types": [
+            "node", "express", "cors"
+        ]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
