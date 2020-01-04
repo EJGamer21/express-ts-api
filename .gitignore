@@ -36,3 +36,6 @@ Thumbs.db
 
 # Ignore built ts files
 dist/**/*
+
+# Ignore configuration files
+src/config/db.config.ts
