@@ -1,15 +1,12 @@
-import * as express from 'express';
+import { Router, Request, Response } from 'express';
 
-interface IControllerBase {
-    path : String;
-    router : express.Router;
-
-    initRoutes() : any;
-    get(id : Number) : any;
-    getMany() : any;
-    create() : any;
-    update() : any;
-    delete() : any;
+export default interface IControllerBase {
+    path : string;
+    router : Router;
+    
+    get(req: Request, res: Response)     : Response;
+    getMany(req: Request, res: Response) : Promise<Response>;
+    create(req: Request, res: Response)  : Response;
+    update(req: Request, res: Response)  : Response;
+    delete(req: Request, res: Response)  : Response;
 }
-
-export default IControllerBase;

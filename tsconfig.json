@@ -8,6 +8,8 @@
         "strict": true,
         "moduleResolution": "node",
         "baseUrl": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "paths": {
             "*": [
                 "node_modules/*"
@@ -22,5 +24,8 @@
     },
     "include": [
         "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }

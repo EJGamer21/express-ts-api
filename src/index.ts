@@ -7,8 +7,10 @@ import HomeController from './controllers/home.controller';
 import UserController from './controllers/user.controller';
 
 // PORT
-let port : Number;
-switch (process.env.NODE_ENV) {
+let port : number;
+const env: string | undefined = process.env.NODE_ENV;
+
+switch (env) {
     case 'development':
         port = 8080;
         break;
@@ -23,11 +25,14 @@ switch (process.env.NODE_ENV) {
         break;
 }
 
+function main() {
+    // APP INSTANCE
+    const app = new App([
+        new HomeController(),
+        new UserController()
+    ], port);
 
-// APP INSTANCE
-const app = new App([
-    new HomeController(),
-    new UserController()
-], port);
+    app.listen(env);
+}
 
-app.listen();
+main();

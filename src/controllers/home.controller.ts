@@ -1,37 +1,47 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import IControllerBase from '../interfaces/IControllerBase.interface';
+import ControllerBase from './controllerbase';
 
-class HomeController implements IControllerBase {
-    path = "/"
-    router = express.Router();
+export default class HomeController extends ControllerBase {
 
     constructor() {
+        super('/');
         this.initRoutes();
     }
 
     initRoutes() {
-        this.router.get('/', this.index);
+        this.router.get(this.path, this.index);
     }
 
-    get() {}
-    getMany() {}
-    create() {}
-    update() {}
-    delete() {}
-
-    index = (req: Request, res: Response) => {
-        res.json({
-            message: 'OK',
-            status: 200,
-            data: [
+    get(req: Request, res: Response): Response {
+        try {
+            const data = [
                 {
                     title: 'Hola',
                     body: 'Mundo'
-                }
-            ]                
-        });
+                }];
+
+            return res.json(data);
+        } catch(e) {
+            console.error(e);
+            return res.status(500).json(e);
+        }
+    }
+
+    getMany(req: Request, res: Response): any {
+        return res.json();
+    }
+    
+    create(req: Request, res: Response): Response {
+        return res.json()
+    }
+    update(req: Request, res: Response): Response {
+        return res.json()
+    }
+    delete(req: Request, res: Response): Response {
+        return res.json()
+    }
+
+    index = (req: Request, res: Response) => {
     }
 }
-
-export default HomeController;

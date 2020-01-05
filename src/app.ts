@@ -1,14 +1,16 @@
 import express, { Application } from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import "reflect-metadata";
 
 import IControllerBase from './interfaces/IControllerBase.interface';
 
 class App {
-    public app: Application;
-    public port: Number;
+    private app: Application;
+    private port: number;
 
-    constructor(controllers : Array<IControllerBase>, port : Number) {
+    constructor(controllers : Array<IControllerBase>, port : number) {
         this.app = express();
         this.port = port;
 
@@ -20,7 +22,8 @@ class App {
         const middlewares = [
             bodyParser.json(),
             bodyParser.urlencoded({ extended: false }),
-            cors()
+            cors(),
+            morgan('dev')
         ];
         this.app.use(middlewares);
     }
@@ -31,9 +34,13 @@ class App {
         });
     }
 
-    public listen() {
+    public listen(env: string | undefined) {
         this.app.listen(this.port, () => {
-            console.log(`Server listening on port: http://localhost:${this.port}`);
+            console.log(
+                `Server listening on port: http://localhost:%d in %s mode`,
+                this.port,
+                env
+            );
         });
     }
 }
