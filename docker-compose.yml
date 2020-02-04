@@ -1,0 +1,42 @@
+version: '3'
+services: 
+  database:
+    image: mysql:8.0
+    container_name: express_ts_db
+    volumes: 
+      - C:\www\databases\mysql\fractal\:/var/lib/mysql
+    environment: 
+      # Update this to your actual pass
+      - MYSQL_HOST=127.0.0.1
+      - MYSQL_ROOT_PASSWORD=r00tP@$$w0rd
+      - MYSQL_USER=enger
+      - MYSQL_PASS=Butterfly
+    # command: --innodb_use_native_aio=0
+    # command: init_database.sh
+    networks: 
+      - internal
+      - external
+    ports: 
+      - 3306:3306
+    expose: 
+      - 3306
+    restart: unless-stopped
+
+  api:
+    build: .
+    container_name: express_ts_api
+    command: nodemon -L -x ts-node src/index.ts --inspect=0.0.0.0:5858
+    networks: 
+      - internal
+      - external
+    volumes:
+      - .:/app/api
+    environment: 
+      - NODE_ENV=docker
+    ports:
+      - 8080:80
+      - 5858:5858
+
+networks: 
+  internal:
+  external: 
