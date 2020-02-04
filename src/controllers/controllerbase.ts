@@ -11,34 +11,31 @@ export default abstract class ControllerBase implements IControllerBase {
         this.router = express.Router();
     }
 
-    get(req: Request, res: Response): Response {
+    async get(req: Request, res: Response): Promise<Response> {
         try {
             const data = [{
                 title: 'World',
-                message: "Hallo"
+                message: "Hallo",
+                params: req.params
             }];
-            return res.json(data);
+            return res.json({ error: false, data });
         } catch (e) {
             console.error(e);
-            return res.status(500).json({
-                message: e
-            })
+            return res.status(500).json({ error: true, message: e });
         }
     }
 
-    getMany(req: Request, res: Response): any {
+    async getMany(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
     
-    create(req: Request, res: Response): Response {
+    async create(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    update(req: Request, res: Response): Response {
+    async update(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    delete(req: Request, res: Response): Response {
+    async delete(req: Request, res: Response): Promise<Response> {
         return res.json()
-    }
-
-    
+    }    
 }

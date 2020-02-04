@@ -12,7 +12,7 @@ const env: string | undefined = process.env.NODE_ENV;
 
 switch (env) {
     case 'development':
-        port = 8080;
+        port = 8081;
         break;
     case 'docker':
         port = 80;

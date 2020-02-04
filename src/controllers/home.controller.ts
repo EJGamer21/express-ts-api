@@ -1,4 +1,3 @@
-import express from 'express';
 import { Request, Response } from 'express';
 import ControllerBase from './controllerbase';
 
@@ -10,10 +9,10 @@ export default class HomeController extends ControllerBase {
     }
 
     initRoutes() {
-        this.router.get(this.path, this.index);
+        this.router.get(this.path, this.getMany);
     }
 
-    get(req: Request, res: Response): Response {
+    async get(req: Request, res: Response): Promise<Response> {
         try {
             const data = [
                 {
@@ -28,20 +27,17 @@ export default class HomeController extends ControllerBase {
         }
     }
 
-    getMany(req: Request, res: Response): any {
+    async getMany(req: Request, res: Response): Promise<Response> {
         return res.json();
     }
     
-    create(req: Request, res: Response): Response {
+    async create(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    update(req: Request, res: Response): Response {
+    async update(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    delete(req: Request, res: Response): Response {
+    async delete(req: Request, res: Response): Promise<Response> {
         return res.json()
-    }
-
-    index = (req: Request, res: Response) => {
     }
 }

@@ -13,11 +13,11 @@ export default class UserController extends ControllerBase {
     }
     
     initRoutes(): void {
-        this.router.get(this.path, this.getMany);
         this.router.get(`${ this.path }/:id`, this.get)
+        this.router.get(this.path, this.getMany);
     }
 
-    get = (req: Request, res: Response): Response => {
+    get = async (req: Request, res: Response): Promise<Response> => {
         try {
             const id = parseInt(req.params.id);
 
@@ -37,7 +37,8 @@ export default class UserController extends ControllerBase {
 
     getMany = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const data = await this.userModel.get();
+            const data: Promise<any> | boolean = await this.userModel.get();
+            console.log(data);
             return res.json(data);
         } catch(e) {
             console.error(e);
@@ -45,13 +46,13 @@ export default class UserController extends ControllerBase {
         }
     }
 
-    create(req: Request, res: Response): Response {
+    async create(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    update(req: Request, res: Response): Response {
+    async update(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
-    delete(req: Request, res: Response): Response {
+    async delete(req: Request, res: Response): Promise<Response> {
         return res.json()
     }
 }
